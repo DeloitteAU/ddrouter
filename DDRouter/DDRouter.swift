@@ -1,7 +1,9 @@
 import Foundation
 import RxSwift
 
-public class DDRouter {
+// MARK: - DDRouter
+
+public enum DDRouter {
     static var sharedSession: URLSession?
     static var printToConsole = false
 
@@ -9,12 +11,14 @@ public class DDRouter {
     public static func initialise(
         configuration: URLSessionConfiguration,
         session: URLSession? = nil,
-        printToConsole: Bool = false) {
-
+        printToConsole: Bool = false
+    ) {
         sharedSession = session ?? URLSession(configuration: configuration)
         Self.printToConsole = printToConsole
     }
 }
+
+// MARK: - RouterProtocol
 
 public protocol RouterProtocol {
     associatedtype Endpoint: EndpointType
@@ -23,16 +27,20 @@ public protocol RouterProtocol {
     init(ephemeralSession: Bool)
 }
 
+// MARK: - EmptyStruct
+
 public struct EmptyStruct: Decodable {}
 
-extension RouterProtocol {
-    public typealias Empty = EmptyStruct
+public extension RouterProtocol {
+    typealias Empty = EmptyStruct
 }
+
+// MARK: - Router
 
 public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterProtocol {
     var urlSession: URLSession?
 
-    required public init(ephemeralSession: Bool = false) {
+    public required init(ephemeralSession: Bool = false) {
         urlSession = ephemeralSession
             ? createEphemeralSession()
             : DDRouter.sharedSession
@@ -51,12 +59,11 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
         return URLSession(configuration: ephemeralConfig)
     }
 
-    // todo: do this in the future
+    // TODO: do this in the future
     // https://medium.com/@danielt1263/retrying-a-network-request-despite-having-an-invalid-token-b8b89340d29
 
     public func requestRaw(_ route: Endpoint) -> Single<Data> {
-
-        return Single.create { [weak self] single in
+        Single.create { [weak self] single in
             // bind self or return unknown error
             guard let self = self else {
                 single(.error(APIError<E>.unknownError(nil)))
@@ -69,14 +76,13 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
             let request: URLRequest
             do {
                 request = try self.buildRequest(from: route)
-            }
-            catch let error {
+            } catch {
                 single(.error(error))
                 return Disposables.create()
             }
 
             // log the request
-            // todo: this should be a noop in prod / when disabled
+            // TODO: this should be a noop in prod / when disabled
             if DDRouter.printToConsole {
                 NetworkLogger.log(request: request)
             }
@@ -97,19 +103,17 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                 }
 
                 // get the response body or throw null data error
-                // todo: technically should throw different error if
+                // TODO: technically should throw different error if
                 // first cast fails
                 guard
                     let response = response as? HTTPURLResponse,
                     let responseData = data else {
-
                     single(.error(APIError<E>.nullData))
                     return
                 }
 
                 // print response
                 if DDRouter.printToConsole {
-
                     // log response - todo: proper logging
                     NetworkLogger.log(response: response)
 
@@ -119,7 +123,6 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
 
                 // response switch
                 switch response.statusCode {
-
                 // 204 success with empty response
                 case 204:
                     single(.success(responseData))
@@ -140,22 +143,23 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     }
 
                     switch statusCode {
-
                     // bad request
                     case .badRequest:
                         let error = try? JSONDecoder().decode(
                             E.self,
-                            from: responseData)
+                            from: responseData
+                        )
                         single(.error(APIError<E>.badRequest(error)))
 
                     // unauthorized
                     case .unauthorized:
                         let error = try? JSONDecoder().decode(
                             E.self,
-                            from: responseData)
+                            from: responseData
+                        )
                         single(.error(APIError<E>.unauthorized(error)))
                         return
-                        // todo: add autoretry back, outside this function
+                        // TODO: add autoretry back, outside this function
 
                     // resource not found
                     case .notFound:
@@ -169,14 +173,16 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     case .forbidden:
                         let error = try? JSONDecoder().decode(
                             E.self,
-                            from: responseData)
+                            from: responseData
+                        )
                         single(.error(APIError<E>.forbidden(error)))
 
                     // unknown
                     default:
                         let error = try? JSONDecoder().decode(
                             E.self,
-                            from: responseData)
+                            from: responseData
+                        )
 
                         single(.error(APIError<E>.unknownError(error)))
                     }
@@ -187,21 +193,22 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     if
                         let statusCode = HTTPStatusCode(rawValue: response.statusCode),
                         statusCode == .serviceUnavailable {
-
                         single(.error(APIError<E>.serviceUnavailable))
                         return
                     }
 
                     let error = try? JSONDecoder().decode(
                         E.self,
-                        from: responseData)
+                        from: responseData
+                    )
                     single(.error(APIError<E>.serverError(error)))
 
                 // default / unknown error
                 default:
                     let error = try? JSONDecoder().decode(
                         E.self,
-                        from: responseData)
+                        from: responseData
+                    )
 
                     single(.error(APIError<E>.unknownError(error)))
                 }
@@ -220,8 +227,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
     // this returns a single that will always subscribe on a background thread
     // and observe on the main thread
     public func request<T: Decodable>(_ route: Endpoint) -> Single<T> {
-
-        return requestRaw(route)
+        requestRaw(route)
             .map { responseData in
 
                 // empty
@@ -232,8 +238,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     // decode response
                     let decodedResponse = try JSONDecoder().decode(T.self, from: responseData)
                     return decodedResponse
-                }
-                catch (let error) {
+                } catch {
                     throw APIError<E>.serializeError(error)
                 }
             }
@@ -241,13 +246,12 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
 
     // build URLRequest from a given endpoint route
     private func buildRequest(from route: EndpointType) throws -> URLRequest {
-
         guard
-            let urlSession = self.urlSession,
+            let urlSession = urlSession,
             var urlComponents = URLComponents(
                 url: route.baseURL.appendingPathComponent(route.path),
-                resolvingAgainstBaseURL: true) else {
-
+                resolvingAgainstBaseURL: true
+            ) else {
             throw APIError<E>.internalError
         }
 
@@ -266,7 +270,8 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
         var request = URLRequest(
             url: url,
             cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-            timeoutInterval: urlSession.configuration.timeoutIntervalForRequest)
+            timeoutInterval: urlSession.configuration.timeoutIntervalForRequest
+        )
 
         // method
         request.httpMethod = route.method.rawValue
@@ -286,51 +291,67 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
         case .request:
             break
 
-        case .requestEncodableParameters(
-            let bodyParameters,
-            let urlParameters):
+        case let .requestEncodableParameters(
+            bodyParameters,
+            urlParameters
+        ):
 
             do {
                 try ParameterEncoding.encode(
                     urlRequest: &request,
                     bodyParameters: bodyParameters,
-                    urlParameters: urlParameters)
-            }
-            catch let error {
+                    urlParameters: urlParameters
+                )
+            } catch {
                 throw APIError<E>.serializeError(error)
             }
+        case let .requestWithBody(body):
+            do {
+                try ParameterEncoding.encode(
+                    urlRequest: &request,
+                    bodyParameters: body,
+                    urlParameters: nil
+                )
+            } catch {
+                throw APIError<E>.serializeError(error)
+            }
+        case let .requestWithRawBody(body):
+            request.httpBody = body
         }
         return request
     }
 
     private static func addAdditionalHeaders(
         _ additionalHeaders: HTTPHeaders?,
-        request: inout URLRequest) {
-
-        guard let headers = additionalHeaders else { return }
+        request: inout URLRequest
+    ) {
+        guard let headers = additionalHeaders else {
+            return
+        }
 
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
     }
 
-    // todo: move to NetworkLogger
+    // TODO: move to NetworkLogger
     private static func printJSONData(data: Data) {
-
         guard
             let object = try? JSONSerialization.jsonObject(
                 with: data,
-                options: []),
+                options: []
+            ),
             let data = try? JSONSerialization.data(
                 withJSONObject: object,
-                options: [.prettyPrinted]),
+                options: [.prettyPrinted]
+            ),
             let prettyPrintedString = NSString(
                 data: data,
-                encoding: String.Encoding.utf8.rawValue) else {
-
-                // todo: consistent error logging
-                print("----- Error in Json Response")
-                return
+                encoding: String.Encoding.utf8.rawValue
+            ) else {
+            // TODO: consistent error logging
+            print("----- Error in Json Response")
+            return
         }
 
         print(prettyPrintedString)

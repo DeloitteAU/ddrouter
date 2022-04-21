@@ -1,31 +1,64 @@
-import XCTest
 @testable import DDRouter
-
-import RxTest
 import RxBlocking
+import RxTest
+import XCTest
 
 class DDRouterTests: XCTestCase {
-
-    var router: Router<TestEndpoint>?
+    var router: Router<TestEndpoint, TestErrorModel>?
 
     override func setUp() {
-        self.router = Router<TestEndpoint>()
+        DDRouter.initialise(
+            configuration: URLSessionConfiguration.default,
+            printToConsole: false
+        )
+        router = Router<TestEndpoint, TestErrorModel>()
     }
 
     override func tearDown() {
-        self.router = nil
+        router = nil
+        DDRouter.sharedSession = nil
     }
 
-    // todo: tests for all the failure cases
+    // TODO: tests for all the failure cases
     func testSuccess() {
-        guard let response: ResponseModel = try? self.router?.request(.random)
+        guard let response: ResponseModel = try? router?.request(.randomQuote)
             .toBlocking()
             .first() else {
-                XCTFail()
-                return
+            XCTFail()
+            return
         }
 
-        XCTAssert(response.author.count > 0)
-        XCTAssert(response.en.count > 0)
+        XCTAssert(!response.author.isEmpty)
+        XCTAssert(!response.en.isEmpty)
+    }
+
+    func testRawData() throws {
+        let data: Data = "A raw string".data(using: .utf8)!
+        guard let response: PostmanDataModel = try? router?.request(.postmanPost(data: data))
+            .toBlocking()
+            .first() else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(response.data, "A raw string")
+    }
+
+    func testRawJSON() throws {
+        let data: Data = """
+        {
+        "foo": "bar",
+        "dog": "7"
+        }
+        """.data(using: .utf8)!
+        guard let response: PostmanJSONModel = try? router?.request(.postmanPost(data: data))
+            .toBlocking()
+            .first() else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(response.json!["foo"], "bar")
+        XCTAssertEqual(response.json!["dog"], "7")
     }
 }

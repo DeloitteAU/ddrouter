@@ -1,48 +1,87 @@
-import Foundation
 import DDRouter
+import Foundation
+
+// MARK: - ResponseModel
 
 struct ResponseModel: Decodable {
-    let _id: String
+    let id: String
     let en: String
     let author: String
 }
 
-enum TestEndpoint {
-    case random
+// MARK: - PostmanJSONModel
+
+struct PostmanJSONModel: Decodable {
+    let json: [String: String]?
+    let url: URL
+    let headers: HTTPHeaders
+    let args: [String: String]
 }
 
-extension TestEndpoint: EndpointType {
+// MARK: - PostmanDataModel
 
+struct PostmanDataModel: Decodable {
+    let url: URL
+    let data: String?
+    let headers: HTTPHeaders
+    let args: [String: String]
+}
+
+// MARK: - TestErrorModel
+
+struct TestErrorModel: APIErrorModelProtocol {}
+
+// MARK: - TestEndpoint
+
+enum TestEndpoint {
+    case randomQuote
+    case postmanPost(data: Data)
+}
+
+// MARK: EndpointType
+
+extension TestEndpoint: EndpointType {
     var baseURL: URL {
-        return URL(string: "https://programming-quotes-api.herokuapp.com")!
+        switch self {
+        case .randomQuote:
+            return URL(string: "https://programming-quotes-api.herokuapp.com")!
+        case .postmanPost:
+            return URL(string: "https://postman-echo.com")!
+        }
     }
 
     var path: String {
         switch self {
-        case .random:
-            return "/quotes/random"
+        case .randomQuote:
+            return "quotes/random"
+        case .postmanPost:
+            return "post"
         }
     }
 
-    var query: [String : String] {
-        return [:]
+    var query: [String: String] {
+        [:]
     }
 
     var method: HTTPMethod {
         switch self {
-        case .random:
+        case .randomQuote:
             return .get
+        case .postmanPost:
+            return .post
         }
     }
 
     var task: HTTPTask {
         switch self {
-        case .random:
+        case .randomQuote:
             return .request
+        case let .postmanPost(data):
+            return .requestWithRawBody(body: data)
         }
     }
 
     var headers: HTTPHeaders? {
-        return [:]
+        [:]
     }
 }
