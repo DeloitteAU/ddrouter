@@ -177,6 +177,14 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                         )
                         single(.error(APIError<E>.forbidden(error)))
 
+                    // conflict
+                    case .conflict:
+                        let error = try? JSONDecoder().decode(
+                            E.self,
+                            from: responseData
+                        )
+                        single(.error(APIError<E>.conflict(error)))
+
                     // unknown
                     default:
                         let error = try? JSONDecoder().decode(
