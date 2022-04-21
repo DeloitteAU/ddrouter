@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   spec.version      = '0.6.0'
   spec.license      = { :type => 'ISC' }
   spec.homepage     = 'https://github.com/DeloitteDigitalAPAC/ddrouter'
-  spec.authors      = { 'Deloitte Digital' => 'wrigney@deloitte.com.au' }
+  spec.authors      = { 'Deloitte Digital' => 'tplester@deloitte.com.au' }
   spec.summary      = 'Deloitte Digital simple networking framework.'
   spec.source       = { :git => 'https://github.com/DeloitteDigitalAPAC/ddrouter.git', :tag => 'v0.6.0' }
   spec.source_files = 'DDRouter', 'DDRouter/**/*.swift'
