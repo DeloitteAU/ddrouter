@@ -4,14 +4,19 @@ import RxTest
 import XCTest
 
 class DDRouterTests: XCTestCase {
-    var router: Router<TestEndpoint>?
+    var router: Router<TestEndpoint, TestErrorModel>?
 
     override func setUp() {
-        router = Router<TestEndpoint>()
+        DDRouter.initialise(
+            configuration: URLSessionConfiguration.default,
+            printToConsole: false
+        )
+        router = Router<TestEndpoint, TestErrorModel>()
     }
 
     override func tearDown() {
         router = nil
+        DDRouter.sharedSession = nil
     }
 
     // TODO: tests for all the failure cases

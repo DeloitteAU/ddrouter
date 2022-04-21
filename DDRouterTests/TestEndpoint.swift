@@ -4,10 +4,14 @@ import Foundation
 // MARK: - ResponseModel
 
 struct ResponseModel: Decodable {
-    let _id: String
+    let id: String
     let en: String
     let author: String
 }
+
+// MARK: - TestErrorModel
+
+struct TestErrorModel: APIErrorModelProtocol {}
 
 // MARK: - TestEndpoint
 
