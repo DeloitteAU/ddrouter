@@ -1,38 +1,39 @@
 import Foundation
 
+// MARK: - APIErrorModelProtocol
+
 // implement this protocol and pass implementation type as generic
 // parameter to the router and APIError types
 public protocol APIErrorModelProtocol: Decodable {}
 
-// todo: change this to correspond to normal status codes
+// MARK: - APIError
+
+// TODO: change this to correspond to normal status codes
 
 /// An error type usedor http
 public enum APIError<APIErrorModel: APIErrorModelProtocol>: Error {
-    case
     // General (internal) errors
-    serializeError(Error?),
-    internalError,
-    nullData,
-
+    case serializeError(Error?)
+    case internalError
+    case nullData
     // 4xx Client errors
-    badRequest(APIErrorModel?),
-    unauthorized(APIErrorModel?),
-    forbidden(APIErrorModel?),
-    notFound,
-    tooManyRequests,
+    case badRequest(APIErrorModel?)
+    case unauthorized(APIErrorModel?)
+    case forbidden(APIErrorModel?)
+    case notFound
+    case tooManyRequests
 
     // 5xx Server errors
-    serverError(APIErrorModel?),    // 500
-    serviceUnavailable,             // 503
+    case serverError(APIErrorModel?) // 500
+    case serviceUnavailable // 503
 
     // Network/connection errors
-    networkError,                   // Low level network problems, e.g. can't connect, timeouts
-    insecureConnection,             // Thrown when NSURLSession detects security related network problems
+    case networkError // Low level network problems, e.g. can't connect, timeouts
+    case insecureConnection // Thrown when NSURLSession detects security related network problems
 
     // Other errors
-    logoutError,                    // Relogin failed, will be logged out directly
+    case logoutError // Relogin failed, will be logged out directly
 
     // Unknown error
-    unknownError(APIErrorModel?)    // Catch all
+    case unknownError(APIErrorModel?) // Catch all
 }
-

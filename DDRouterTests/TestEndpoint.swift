@@ -1,5 +1,7 @@
-import Foundation
 import DDRouter
+import Foundation
+
+// MARK: - ResponseModel
 
 struct ResponseModel: Decodable {
     let _id: String
@@ -7,14 +9,17 @@ struct ResponseModel: Decodable {
     let author: String
 }
 
+// MARK: - TestEndpoint
+
 enum TestEndpoint {
     case random
 }
 
-extension TestEndpoint: EndpointType {
+// MARK: EndpointType
 
+extension TestEndpoint: EndpointType {
     var baseURL: URL {
-        return URL(string: "https://programming-quotes-api.herokuapp.com")!
+        URL(string: "https://programming-quotes-api.herokuapp.com")!
     }
 
     var path: String {
@@ -24,8 +29,8 @@ extension TestEndpoint: EndpointType {
         }
     }
 
-    var query: [String : String] {
-        return [:]
+    var query: [String: String] {
+        [:]
     }
 
     var method: HTTPMethod {
@@ -43,6 +48,6 @@ extension TestEndpoint: EndpointType {
     }
 
     var headers: HTTPHeaders? {
-        return [:]
+        [:]
     }
 }

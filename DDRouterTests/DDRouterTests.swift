@@ -1,31 +1,29 @@
-import XCTest
 @testable import DDRouter
-
-import RxTest
 import RxBlocking
+import RxTest
+import XCTest
 
 class DDRouterTests: XCTestCase {
-
     var router: Router<TestEndpoint>?
 
     override func setUp() {
-        self.router = Router<TestEndpoint>()
+        router = Router<TestEndpoint>()
     }
 
     override func tearDown() {
-        self.router = nil
+        router = nil
     }
 
-    // todo: tests for all the failure cases
+    // TODO: tests for all the failure cases
     func testSuccess() {
-        guard let response: ResponseModel = try? self.router?.request(.random)
+        guard let response: ResponseModel = try? router?.request(.random)
             .toBlocking()
             .first() else {
-                XCTFail()
-                return
+            XCTFail()
+            return
         }
 
-        XCTAssert(response.author.count > 0)
-        XCTAssert(response.en.count > 0)
+        XCTAssert(!response.author.isEmpty)
+        XCTAssert(!response.en.isEmpty)
     }
 }

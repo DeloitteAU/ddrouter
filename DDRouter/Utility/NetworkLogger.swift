@@ -2,7 +2,6 @@ import Foundation
 
 class NetworkLogger {
     static func log(request: URLRequest) {
-
         let urlString = request.url?.absoluteString ?? ""
         let urlComponents = NSURLComponents(string: urlString)
 
@@ -14,11 +13,11 @@ class NetworkLogger {
         let host = "\(urlComponents?.host ?? "")"
 
         var logOutput = """
-                        \(urlString) \n\n
-                        \(method) \(path)?\(query) HTTP/1.1 \n
-                        HOST: \(host)\n
-                        """
-        for (key,value) in request.allHTTPHeaderFields ?? [:] {
+        \(urlString) \n\n
+        \(method) \(path)?\(query) HTTP/1.1 \n
+        HOST: \(host)\n
+        """
+        for (key, value) in request.allHTTPHeaderFields ?? [:] {
             logOutput += "\(key): \(value) \n"
         }
         if let body = request.httpBody {

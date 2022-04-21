@@ -3,10 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		528DED87280FD92C008B9DCF /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED83280FD926008B9DCF /* RxBlocking.xcframework */; };
+		528DED88280FD930008B9DCF /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED82280FD926008B9DCF /* RxCocoa.xcframework */; };
+		528DED89280FD930008B9DCF /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED86280FD926008B9DCF /* RxRelay.xcframework */; };
+		528DED8A280FD930008B9DCF /* RxTest.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED85280FD926008B9DCF /* RxTest.xcframework */; };
+		528DED8B280FD930008B9DCF /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED84280FD926008B9DCF /* RxSwift.xcframework */; };
+		528DED8C280FD935008B9DCF /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED84280FD926008B9DCF /* RxSwift.xcframework */; };
 		C981C1F7232B189100738C6D /* DDRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C981C1ED232B189100738C6D /* DDRouter.framework */; };
 		C981C1FC232B189100738C6D /* DDRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C1FB232B189100738C6D /* DDRouterTests.swift */; };
 		C981C1FE232B189100738C6D /* DDRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = C981C1F0232B189100738C6D /* DDRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -21,7 +27,6 @@
 		C981C278232F247E00738C6D /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C26C232F247E00738C6D /* NetworkEnvironment.swift */; };
 		C981C279232F247E00738C6D /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C26D232F247E00738C6D /* EndpointType.swift */; };
 		C981C27A232F247E00738C6D /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C26F232F247E00738C6D /* NetworkLogger.swift */; };
-		C981C27D232F24EE00738C6D /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C981C27C232F24EE00738C6D /* RxSwift.framework */; };
 		C981C27F232F256600738C6D /* ParameterEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C27E232F256600738C6D /* ParameterEncodingTests.swift */; };
 		C9A1C448245951FA0084BD30 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = C9A1C447245951FA0084BD30 /* LICENSE.md */; };
 		C9F3B80A233D919200CE086E /* TestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F3B809233D919200CE086E /* TestEndpoint.swift */; };
@@ -38,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		528DED82280FD926008B9DCF /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxCocoa.xcframework; sourceTree = "<group>"; };
+		528DED83280FD926008B9DCF /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxBlocking.xcframework; sourceTree = "<group>"; };
+		528DED84280FD926008B9DCF /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxSwift.xcframework; sourceTree = "<group>"; };
+		528DED85280FD926008B9DCF /* RxTest.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxTest.xcframework; sourceTree = "<group>"; };
+		528DED86280FD926008B9DCF /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxRelay.xcframework; sourceTree = "<group>"; };
 		C981C1ED232B189100738C6D /* DDRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DDRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C981C1F0232B189100738C6D /* DDRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDRouter.h; sourceTree = "<group>"; };
 		C981C1F1232B189100738C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +65,6 @@
 		C981C26C232F247E00738C6D /* NetworkEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		C981C26D232F247E00738C6D /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		C981C26F232F247E00738C6D /* NetworkLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
-		C981C27C232F24EE00738C6D /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		C981C27E232F256600738C6D /* ParameterEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodingTests.swift; sourceTree = "<group>"; };
 		C9A1C447245951FA0084BD30 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = SOURCE_ROOT; };
 		C9F3B809233D919200CE086E /* TestEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEndpoint.swift; sourceTree = "<group>"; };
@@ -66,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C981C27D232F24EE00738C6D /* RxSwift.framework in Frameworks */,
+				528DED8C280FD935008B9DCF /* RxSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,20 +83,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528DED87280FD92C008B9DCF /* RxBlocking.xcframework in Frameworks */,
+				528DED89280FD930008B9DCF /* RxRelay.xcframework in Frameworks */,
 				C981C1F7232B189100738C6D /* DDRouter.framework in Frameworks */,
+				528DED8B280FD930008B9DCF /* RxSwift.xcframework in Frameworks */,
+				528DED8A280FD930008B9DCF /* RxTest.xcframework in Frameworks */,
+				528DED88280FD930008B9DCF /* RxCocoa.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		528DED81280FD8E9008B9DCF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				528DED83280FD926008B9DCF /* RxBlocking.xcframework */,
+				528DED82280FD926008B9DCF /* RxCocoa.xcframework */,
+				528DED86280FD926008B9DCF /* RxRelay.xcframework */,
+				528DED84280FD926008B9DCF /* RxSwift.xcframework */,
+				528DED85280FD926008B9DCF /* RxTest.xcframework */,
+			);
+			name = Frameworks;
+			path = Carthage/Build;
+			sourceTree = "<group>";
+		};
 		C981C1E3232B189100738C6D = {
 			isa = PBXGroup;
 			children = (
 				C981C1EF232B189100738C6D /* DDRouter */,
 				C981C1FA232B189100738C6D /* DDRouterTests */,
+				528DED81280FD8E9008B9DCF /* Frameworks */,
 				C981C1EE232B189100738C6D /* Products */,
-				C981C27B232F24EE00738C6D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,14 +197,6 @@
 				C981C26F232F247E00738C6D /* NetworkLogger.swift */,
 			);
 			path = Utility;
-			sourceTree = "<group>";
-		};
-		C981C27B232F24EE00738C6D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C981C27C232F24EE00738C6D /* RxSwift.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

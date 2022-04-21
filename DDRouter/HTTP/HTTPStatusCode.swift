@@ -3,7 +3,7 @@ import Foundation
 /** An enumeration of all HTTP status codes and their corresponding descriptions.
  */
 
-// todo: should be all the status codes!
+// TODO: should be all the status codes!
 enum HTTPStatusCode: Int {
     // 2xx Success
     case ok = 200

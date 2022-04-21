@@ -12,13 +12,13 @@ public protocol EndpointType {
     var method: HTTPMethod { get }
 
     // task (e.g. whether or not there are encodable parameters)
-    // todo: this is silly imo, can be streamlined
+    // TODO: this is silly imo, can be streamlined
     var task: HTTPTask { get }
 
     // headers
     var headers: HTTPHeaders? { get }
 
     // query parameters
-    // todo: why is this one not typealiased the same as headers?
+    // TODO: why is this one not typealiased the same as headers?
     var query: [String: String] { get }
 }

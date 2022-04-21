@@ -1,15 +1,10 @@
-import XCTest
 @testable import DDRouter
+import XCTest
 
 class ParameterEncodingTests: XCTestCase {
+    override func setUp() {}
 
-    override func setUp() {
-
-    }
-
-    override func tearDown() {
-
-    }
+    override func tearDown() {}
 
     func testEncode() {
 //        ParameterEncoding.getEncoded(encodable: <#T##Encodable#>)
