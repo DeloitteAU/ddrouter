@@ -9,6 +9,24 @@ struct ResponseModel: Decodable {
     let author: String
 }
 
+// MARK: - PostmanJSONModel
+
+struct PostmanJSONModel: Decodable {
+    let json: [String: String]?
+    let url: URL
+    let headers: HTTPHeaders
+    let args: [String: String]
+}
+
+// MARK: - PostmanDataModel
+
+struct PostmanDataModel: Decodable {
+    let url: URL
+    let data: String?
+    let headers: HTTPHeaders
+    let args: [String: String]
+}
+
 // MARK: - TestErrorModel
 
 struct TestErrorModel: APIErrorModelProtocol {}
@@ -16,20 +34,28 @@ struct TestErrorModel: APIErrorModelProtocol {}
 // MARK: - TestEndpoint
 
 enum TestEndpoint {
-    case random
+    case randomQuote
+    case postmanPost(data: Data)
 }
 
 // MARK: EndpointType
 
 extension TestEndpoint: EndpointType {
     var baseURL: URL {
-        URL(string: "https://programming-quotes-api.herokuapp.com")!
+        switch self {
+        case .randomQuote:
+            return URL(string: "https://programming-quotes-api.herokuapp.com")!
+        case .postmanPost:
+            return URL(string: "https://postman-echo.com")!
+        }
     }
 
     var path: String {
         switch self {
-        case .random:
-            return "/quotes/random"
+        case .randomQuote:
+            return "quotes/random"
+        case .postmanPost:
+            return "post"
         }
     }
 
@@ -39,15 +65,19 @@ extension TestEndpoint: EndpointType {
 
     var method: HTTPMethod {
         switch self {
-        case .random:
+        case .randomQuote:
             return .get
+        case .postmanPost:
+            return .post
         }
     }
 
     var task: HTTPTask {
         switch self {
-        case .random:
+        case .randomQuote:
             return .request
+        case let .postmanPost(data):
+            return .requestWithRawBody(body: data)
         }
     }
 

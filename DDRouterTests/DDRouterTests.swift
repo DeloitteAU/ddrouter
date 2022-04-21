@@ -21,7 +21,7 @@ class DDRouterTests: XCTestCase {
 
     // TODO: tests for all the failure cases
     func testSuccess() {
-        guard let response: ResponseModel = try? router?.request(.random)
+        guard let response: ResponseModel = try? router?.request(.randomQuote)
             .toBlocking()
             .first() else {
             XCTFail()
@@ -30,5 +30,35 @@ class DDRouterTests: XCTestCase {
 
         XCTAssert(!response.author.isEmpty)
         XCTAssert(!response.en.isEmpty)
+    }
+
+    func testRawData() throws {
+        let data: Data = "A raw string".data(using: .utf8)!
+        guard let response: PostmanDataModel = try? router?.request(.postmanPost(data: data))
+            .toBlocking()
+            .first() else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(response.data, "A raw string")
+    }
+
+    func testRawJSON() throws {
+        let data: Data = """
+        {
+        "foo": "bar",
+        "dog": "7"
+        }
+        """.data(using: .utf8)!
+        guard let response: PostmanJSONModel = try? router?.request(.postmanPost(data: data))
+            .toBlocking()
+            .first() else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(response.json!["foo"], "bar")
+        XCTAssertEqual(response.json!["dog"], "7")
     }
 }

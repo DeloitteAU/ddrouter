@@ -305,6 +305,18 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
             } catch {
                 throw APIError<E>.serializeError(error)
             }
+        case let .requestWithBody(body):
+            do {
+                try ParameterEncoding.encode(
+                    urlRequest: &request,
+                    bodyParameters: body,
+                    urlParameters: nil
+                )
+            } catch {
+                throw APIError<E>.serializeError(error)
+            }
+        case let .requestWithRawBody(body):
+            request.httpBody = body
         }
         return request
     }
