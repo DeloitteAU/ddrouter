@@ -3,16 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		528DED87280FD92C008B9DCF /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED83280FD926008B9DCF /* RxBlocking.xcframework */; };
-		528DED88280FD930008B9DCF /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED82280FD926008B9DCF /* RxCocoa.xcframework */; };
-		528DED89280FD930008B9DCF /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED86280FD926008B9DCF /* RxRelay.xcframework */; };
-		528DED8A280FD930008B9DCF /* RxTest.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED85280FD926008B9DCF /* RxTest.xcframework */; };
-		528DED8B280FD930008B9DCF /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED84280FD926008B9DCF /* RxSwift.xcframework */; };
-		528DED8C280FD935008B9DCF /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED84280FD926008B9DCF /* RxSwift.xcframework */; };
 		C981C1F7232B189100738C6D /* DDRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C981C1ED232B189100738C6D /* DDRouter.framework */; };
 		C981C1FC232B189100738C6D /* DDRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C1FB232B189100738C6D /* DDRouterTests.swift */; };
 		C981C1FE232B189100738C6D /* DDRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = C981C1F0232B189100738C6D /* DDRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,11 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		528DED82280FD926008B9DCF /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxCocoa.xcframework; sourceTree = "<group>"; };
-		528DED83280FD926008B9DCF /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxBlocking.xcframework; sourceTree = "<group>"; };
-		528DED84280FD926008B9DCF /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxSwift.xcframework; sourceTree = "<group>"; };
-		528DED85280FD926008B9DCF /* RxTest.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxTest.xcframework; sourceTree = "<group>"; };
-		528DED86280FD926008B9DCF /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxRelay.xcframework; sourceTree = "<group>"; };
 		C981C1ED232B189100738C6D /* DDRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DDRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C981C1F0232B189100738C6D /* DDRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDRouter.h; sourceTree = "<group>"; };
 		C981C1F1232B189100738C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				528DED8C280FD935008B9DCF /* RxSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,37 +71,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				528DED87280FD92C008B9DCF /* RxBlocking.xcframework in Frameworks */,
-				528DED89280FD930008B9DCF /* RxRelay.xcframework in Frameworks */,
 				C981C1F7232B189100738C6D /* DDRouter.framework in Frameworks */,
-				528DED8B280FD930008B9DCF /* RxSwift.xcframework in Frameworks */,
-				528DED8A280FD930008B9DCF /* RxTest.xcframework in Frameworks */,
-				528DED88280FD930008B9DCF /* RxCocoa.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		528DED81280FD8E9008B9DCF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				528DED83280FD926008B9DCF /* RxBlocking.xcframework */,
-				528DED82280FD926008B9DCF /* RxCocoa.xcframework */,
-				528DED86280FD926008B9DCF /* RxRelay.xcframework */,
-				528DED84280FD926008B9DCF /* RxSwift.xcframework */,
-				528DED85280FD926008B9DCF /* RxTest.xcframework */,
-			);
-			name = Frameworks;
-			path = Carthage/Build;
-			sourceTree = "<group>";
-		};
 		C981C1E3232B189100738C6D = {
 			isa = PBXGroup;
 			children = (
 				C981C1EF232B189100738C6D /* DDRouter */,
 				C981C1FA232B189100738C6D /* DDRouterTests */,
-				528DED81280FD8E9008B9DCF /* Frameworks */,
 				C981C1EE232B189100738C6D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -398,7 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -457,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

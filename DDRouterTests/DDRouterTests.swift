@@ -1,6 +1,4 @@
 @testable import DDRouter
-import RxBlocking
-import RxTest
 import XCTest
 
 class DDRouterTests: XCTestCase {
