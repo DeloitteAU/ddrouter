@@ -22,7 +22,7 @@ public enum DDRouter {
 
 public protocol RouterProtocol {
     associatedtype Endpoint: EndpointType
-    associatedtype E: APIErrorModelProtocol
+    associatedtype ErrorModel: APIErrorModelProtocol
     func request<T: Decodable>(_ route: Endpoint) -> Single<T>
     init(ephemeralSession: Bool)
 }
@@ -37,7 +37,7 @@ public extension RouterProtocol {
 
 // MARK: - Router
 
-public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterProtocol {
+public class Router<Endpoint: EndpointType, ErrorModel: APIErrorModelProtocol>: RouterProtocol {
     var urlSession: URLSession?
 
     public required init(ephemeralSession: Bool = false) {
@@ -62,11 +62,12 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
     // TODO: do this in the future
     // https://medium.com/@danielt1263/retrying-a-network-request-despite-having-an-invalid-token-b8b89340d29
 
+    // swiftlint:disable:next function_body_length
     public func requestRaw(_ route: Endpoint) -> Single<Data> {
         Single.create { [weak self] single in
             // bind self or return unknown error
             guard let self = self else {
-                single(.error(APIError<E>.unknownError(nil)))
+                single(.failure(APIError<ErrorModel>.unknownError(nil)))
                 return Disposables.create()
             }
 
@@ -77,7 +78,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
             do {
                 request = try self.buildRequest(from: route)
             } catch {
-                single(.error(error))
+                single(.failure(error))
                 return Disposables.create()
             }
 
@@ -89,7 +90,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
 
             // get the session
             guard let urlSession = self.urlSession else {
-                single(.error(APIError<E>.unknownError(nil)))
+                single(.failure(APIError<ErrorModel>.unknownError(nil)))
                 return Disposables.create()
             }
 
@@ -98,7 +99,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
 
                 // return any error from the url session task - todo: wrap this error
                 if let error = error {
-                    single(.error(error))
+                    single(.failure(error))
                     return
                 }
 
@@ -108,7 +109,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                 guard
                     let response = response as? HTTPURLResponse,
                     let responseData = data else {
-                    single(.error(APIError<E>.nullData))
+                    single(.failure(APIError<ErrorModel>.nullData))
                     return
                 }
 
@@ -116,9 +117,8 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                 if DDRouter.printToConsole {
                     // log response - todo: proper logging
                     NetworkLogger.log(response: response)
-
                     // print response data
-                    Router.printJSONData(data: responseData)
+                    NetworkLogger.printJSONData(data: responseData)
                 }
 
                 // response switch
@@ -138,7 +138,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
 
                     // match the actual status code (or unknown error)
                     guard let statusCode = HTTPStatusCode(rawValue: response.statusCode) else {
-                        single(.error(APIError<E>.unknownError(nil)))
+                        single(.failure(APIError<ErrorModel>.unknownError(nil)))
                         return
                     }
 
@@ -146,53 +146,53 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     // bad request
                     case .badRequest:
                         let error = try? JSONDecoder().decode(
-                            E.self,
+                            ErrorModel.self,
                             from: responseData
                         )
-                        single(.error(APIError<E>.badRequest(error)))
+                        single(.failure(APIError<ErrorModel>.badRequest(error)))
 
                     // unauthorized
                     case .unauthorized:
                         let error = try? JSONDecoder().decode(
-                            E.self,
+                            ErrorModel.self,
                             from: responseData
                         )
-                        single(.error(APIError<E>.unauthorized(error)))
+                        single(.failure(APIError<ErrorModel>.unauthorized(error)))
                         return
                         // TODO: add autoretry back, outside this function
 
                     // resource not found
                     case .notFound:
-                        single(.error(APIError<E>.notFound))
+                        single(.failure(APIError<ErrorModel>.notFound))
 
                     // too many requests
                     case .tooManyRequests:
-                        single(.error(APIError<E>.tooManyRequests))
+                        single(.failure(APIError<ErrorModel>.tooManyRequests))
 
                     // forbidden
                     case .forbidden:
                         let error = try? JSONDecoder().decode(
-                            E.self,
+                            ErrorModel.self,
                             from: responseData
                         )
-                        single(.error(APIError<E>.forbidden(error)))
+                        single(.failure(APIError<ErrorModel>.forbidden(error)))
 
                     // conflict
                     case .conflict:
                         let error = try? JSONDecoder().decode(
-                            E.self,
+                            ErrorModel.self,
                             from: responseData
                         )
-                        single(.error(APIError<E>.conflict(error)))
+                        single(.failure(APIError<ErrorModel>.conflict(error)))
 
                     // unknown
                     default:
                         let error = try? JSONDecoder().decode(
-                            E.self,
+                            ErrorModel.self,
                             from: responseData
                         )
 
-                        single(.error(APIError<E>.unknownError(error)))
+                        single(.failure(APIError<ErrorModel>.unknownError(error)))
                     }
 
                 // 5xx server error
@@ -201,24 +201,24 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     if
                         let statusCode = HTTPStatusCode(rawValue: response.statusCode),
                         statusCode == .serviceUnavailable {
-                        single(.error(APIError<E>.serviceUnavailable))
+                        single(.failure(APIError<ErrorModel>.serviceUnavailable))
                         return
                     }
 
                     let error = try? JSONDecoder().decode(
-                        E.self,
+                        ErrorModel.self,
                         from: responseData
                     )
-                    single(.error(APIError<E>.serverError(error)))
+                    single(.failure(APIError<ErrorModel>.serverError(error)))
 
                 // default / unknown error
                 default:
                     let error = try? JSONDecoder().decode(
-                        E.self,
+                        ErrorModel.self,
                         from: responseData
                     )
 
-                    single(.error(APIError<E>.unknownError(error)))
+                    single(.failure(APIError<ErrorModel>.unknownError(error)))
                 }
             }
             // make the request
@@ -228,8 +228,8 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                 task?.cancel()
             }
         }
-        .subscribeOn(SerialDispatchQueueScheduler(qos: .background))
-        .observeOn(MainScheduler.instance)
+        .subscribe(on: SerialDispatchQueueScheduler(qos: .background))
+        .observe(on: MainScheduler.instance)
     }
 
     // this returns a single that will always subscribe on a background thread
@@ -247,7 +247,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     let decodedResponse = try JSONDecoder().decode(T.self, from: responseData)
                     return decodedResponse
                 } catch {
-                    throw APIError<E>.serializeError(error)
+                    throw APIError<ErrorModel>.serializeError(error)
                 }
             }
     }
@@ -260,7 +260,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                 url: route.baseURL.appendingPathComponent(route.path),
                 resolvingAgainstBaseURL: true
             ) else {
-            throw APIError<E>.internalError
+            throw APIError<ErrorModel>.internalError
         }
 
         // Build query
@@ -271,7 +271,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
 
         // get the url
         guard let url = urlComponents.url else {
-            throw APIError<E>.internalError
+            throw APIError<ErrorModel>.internalError
         }
 
         // create a request
@@ -311,7 +311,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     urlParameters: urlParameters
                 )
             } catch {
-                throw APIError<E>.serializeError(error)
+                throw APIError<ErrorModel>.serializeError(error)
             }
         case let .requestWithBody(body):
             do {
@@ -321,7 +321,7 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
                     urlParameters: nil
                 )
             } catch {
-                throw APIError<E>.serializeError(error)
+                throw APIError<ErrorModel>.serializeError(error)
             }
         case let .requestWithRawBody(body):
             request.httpBody = body
@@ -340,28 +340,5 @@ public class Router<Endpoint: EndpointType, E: APIErrorModelProtocol>: RouterPro
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
-    }
-
-    // TODO: move to NetworkLogger
-    private static func printJSONData(data: Data) {
-        guard
-            let object = try? JSONSerialization.jsonObject(
-                with: data,
-                options: []
-            ),
-            let data = try? JSONSerialization.data(
-                withJSONObject: object,
-                options: [.prettyPrinted]
-            ),
-            let prettyPrintedString = NSString(
-                data: data,
-                encoding: String.Encoding.utf8.rawValue
-            ) else {
-            // TODO: consistent error logging
-            print("----- Error in Json Response")
-            return
-        }
-
-        print(prettyPrintedString)
     }
 }
