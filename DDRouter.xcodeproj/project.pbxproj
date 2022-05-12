@@ -3,16 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		528DED87280FD92C008B9DCF /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED83280FD926008B9DCF /* RxBlocking.xcframework */; };
-		528DED88280FD930008B9DCF /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED82280FD926008B9DCF /* RxCocoa.xcframework */; };
-		528DED89280FD930008B9DCF /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED86280FD926008B9DCF /* RxRelay.xcframework */; };
-		528DED8A280FD930008B9DCF /* RxTest.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED85280FD926008B9DCF /* RxTest.xcframework */; };
-		528DED8B280FD930008B9DCF /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED84280FD926008B9DCF /* RxSwift.xcframework */; };
-		528DED8C280FD935008B9DCF /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528DED84280FD926008B9DCF /* RxSwift.xcframework */; };
+		AAA5C0CD57A92B4A70CFBDDB /* Pods_DDRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56D86B8B39DE32C51513565 /* Pods_DDRouter.framework */; };
 		C981C1F7232B189100738C6D /* DDRouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C981C1ED232B189100738C6D /* DDRouter.framework */; };
 		C981C1FC232B189100738C6D /* DDRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C1FB232B189100738C6D /* DDRouterTests.swift */; };
 		C981C1FE232B189100738C6D /* DDRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = C981C1F0232B189100738C6D /* DDRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +25,7 @@
 		C981C27F232F256600738C6D /* ParameterEncodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C981C27E232F256600738C6D /* ParameterEncodingTests.swift */; };
 		C9A1C448245951FA0084BD30 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = C9A1C447245951FA0084BD30 /* LICENSE.md */; };
 		C9F3B80A233D919200CE086E /* TestEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F3B809233D919200CE086E /* TestEndpoint.swift */; };
+		FC3D6E1405A8A1B85A0AE25D /* Pods_DDRouter_DDRouterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 816F90B3FF1B35A2EE4D141C /* Pods_DDRouter_DDRouterTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,11 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		528DED82280FD926008B9DCF /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxCocoa.xcframework; sourceTree = "<group>"; };
-		528DED83280FD926008B9DCF /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxBlocking.xcframework; sourceTree = "<group>"; };
-		528DED84280FD926008B9DCF /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxSwift.xcframework; sourceTree = "<group>"; };
-		528DED85280FD926008B9DCF /* RxTest.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxTest.xcframework; sourceTree = "<group>"; };
-		528DED86280FD926008B9DCF /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = RxRelay.xcframework; sourceTree = "<group>"; };
+		20A48FCACA6C4AA2E59E1DB2 /* Pods-DDRouter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDRouter.release.xcconfig"; path = "Target Support Files/Pods-DDRouter/Pods-DDRouter.release.xcconfig"; sourceTree = "<group>"; };
+		52394FBD282B817600AB860D /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
+		52394FBE282B817600AB860D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		816F90B3FF1B35A2EE4D141C /* Pods_DDRouter_DDRouterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DDRouter_DDRouterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14466E0368567E7B20A58FC /* Pods-DDRouter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDRouter.debug.xcconfig"; path = "Target Support Files/Pods-DDRouter/Pods-DDRouter.debug.xcconfig"; sourceTree = "<group>"; };
 		C981C1ED232B189100738C6D /* DDRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DDRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C981C1F0232B189100738C6D /* DDRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDRouter.h; sourceTree = "<group>"; };
 		C981C1F1232B189100738C6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +64,9 @@
 		C981C27E232F256600738C6D /* ParameterEncodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodingTests.swift; sourceTree = "<group>"; };
 		C9A1C447245951FA0084BD30 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = SOURCE_ROOT; };
 		C9F3B809233D919200CE086E /* TestEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEndpoint.swift; sourceTree = "<group>"; };
+		CA06650AA656D14C96BA2A67 /* Pods-DDRouter-DDRouterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDRouter-DDRouterTests.release.xcconfig"; path = "Target Support Files/Pods-DDRouter-DDRouterTests/Pods-DDRouter-DDRouterTests.release.xcconfig"; sourceTree = "<group>"; };
+		DE1143FBADA301B1C910A5CA /* Pods-DDRouter-DDRouterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDRouter-DDRouterTests.debug.xcconfig"; path = "Target Support Files/Pods-DDRouter-DDRouterTests/Pods-DDRouter-DDRouterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E56D86B8B39DE32C51513565 /* Pods_DDRouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DDRouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				528DED8C280FD935008B9DCF /* RxSwift.xcframework in Frameworks */,
+				AAA5C0CD57A92B4A70CFBDDB /* Pods_DDRouter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,29 +82,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				528DED87280FD92C008B9DCF /* RxBlocking.xcframework in Frameworks */,
-				528DED89280FD930008B9DCF /* RxRelay.xcframework in Frameworks */,
 				C981C1F7232B189100738C6D /* DDRouter.framework in Frameworks */,
-				528DED8B280FD930008B9DCF /* RxSwift.xcframework in Frameworks */,
-				528DED8A280FD930008B9DCF /* RxTest.xcframework in Frameworks */,
-				528DED88280FD930008B9DCF /* RxCocoa.xcframework in Frameworks */,
+				FC3D6E1405A8A1B85A0AE25D /* Pods_DDRouter_DDRouterTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52394FBC282B813500AB860D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				52394FBD282B817600AB860D /* .swiftformat */,
+				52394FBE282B817600AB860D /* .swiftlint.yml */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		528DED81280FD8E9008B9DCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				528DED83280FD926008B9DCF /* RxBlocking.xcframework */,
-				528DED82280FD926008B9DCF /* RxCocoa.xcframework */,
-				528DED86280FD926008B9DCF /* RxRelay.xcframework */,
-				528DED84280FD926008B9DCF /* RxSwift.xcframework */,
-				528DED85280FD926008B9DCF /* RxTest.xcframework */,
+				E56D86B8B39DE32C51513565 /* Pods_DDRouter.framework */,
+				816F90B3FF1B35A2EE4D141C /* Pods_DDRouter_DDRouterTests.framework */,
 			);
 			name = Frameworks;
 			path = Carthage/Build;
+			sourceTree = "<group>";
+		};
+		8B1B29FDD86AE7766485BBFE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A14466E0368567E7B20A58FC /* Pods-DDRouter.debug.xcconfig */,
+				20A48FCACA6C4AA2E59E1DB2 /* Pods-DDRouter.release.xcconfig */,
+				DE1143FBADA301B1C910A5CA /* Pods-DDRouter-DDRouterTests.debug.xcconfig */,
+				CA06650AA656D14C96BA2A67 /* Pods-DDRouter-DDRouterTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		C981C1E3232B189100738C6D = {
@@ -115,6 +127,8 @@
 				C981C1FA232B189100738C6D /* DDRouterTests */,
 				528DED81280FD8E9008B9DCF /* Frameworks */,
 				C981C1EE232B189100738C6D /* Products */,
+				8B1B29FDD86AE7766485BBFE /* Pods */,
+				52394FBC282B813500AB860D /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,6 +231,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C981C201232B189100738C6D /* Build configuration list for PBXNativeTarget "DDRouter" */;
 			buildPhases = (
+				B517F47392695EF07C910D80 /* [CP] Check Pods Manifest.lock */,
+				52394FB9282B809800AB860D /* SwiftLint */,
 				C981C1E8232B189100738C6D /* Headers */,
 				C981C1E9232B189100738C6D /* Sources */,
 				C981C1EA232B189100738C6D /* Frameworks */,
@@ -235,9 +251,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C981C204232B189100738C6D /* Build configuration list for PBXNativeTarget "DDRouterTests" */;
 			buildPhases = (
+				CF452EC5A66EC2792F7E040D /* [CP] Check Pods Manifest.lock */,
+				52394FBB282B80FD00AB860D /* SwiftFormat */,
+				52394FBA282B80E500AB860D /* SwiftLint */,
 				C981C1F2232B189100738C6D /* Sources */,
 				C981C1F3232B189100738C6D /* Frameworks */,
 				C981C1F4232B189100738C6D /* Resources */,
+				5CFFE29F8CA64435A1EB5E74 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -304,6 +324,124 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		52394FB9282B809800AB860D /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		52394FBA282B80E500AB860D /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		52394FBB282B80FD00AB860D /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"$SRCROOT\"\n";
+		};
+		5CFFE29F8CA64435A1EB5E74 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDRouter-DDRouterTests/Pods-DDRouter-DDRouterTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DDRouter-DDRouterTests/Pods-DDRouter-DDRouterTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DDRouter-DDRouterTests/Pods-DDRouter-DDRouterTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B517F47392695EF07C910D80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DDRouter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF452EC5A66EC2792F7E040D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DDRouter-DDRouterTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C981C1E9232B189100738C6D /* Sources */ = {
@@ -471,6 +609,7 @@
 		};
 		C981C202232B189100738C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A14466E0368567E7B20A58FC /* Pods-DDRouter.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -499,6 +638,7 @@
 		};
 		C981C203232B189100738C6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20A48FCACA6C4AA2E59E1DB2 /* Pods-DDRouter.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -526,8 +666,8 @@
 		};
 		C981C205232B189100738C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE1143FBADA301B1C910A5CA /* Pods-DDRouter-DDRouterTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP3R22V3AN;
 				INFOPLIST_FILE = DDRouterTests/Info.plist;
@@ -545,8 +685,8 @@
 		};
 		C981C206232B189100738C6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA06650AA656D14C96BA2A67 /* Pods-DDRouter-DDRouterTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PP3R22V3AN;
 				INFOPLIST_FILE = DDRouterTests/Info.plist;

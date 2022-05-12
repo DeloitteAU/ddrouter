@@ -5,9 +5,7 @@ class NetworkLogger {
         let urlString = request.url?.absoluteString ?? ""
         let urlComponents = NSURLComponents(string: urlString)
 
-        let method = request.httpMethod != nil
-            ? "\(request.httpMethod!)"
-            : ""
+        let method = request.httpMethod ?? ""
         let path = "\(urlComponents?.path ?? "")"
         let query = "\(urlComponents?.query ?? "")"
         let host = "\(urlComponents?.host ?? "")"
@@ -18,10 +16,10 @@ class NetworkLogger {
         HOST: \(host)\n
         """
         for (key, value) in request.allHTTPHeaderFields ?? [:] {
-            logOutput += "\(key): \(value) \n"
+            logOutput += "\(key): \(value)\n"
         }
         if let body = request.httpBody {
-            logOutput += "\n \(NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "")"
+            logOutput += "\n \(String(data: body, encoding: .utf8) ?? "")"
         }
 
         print("\n - - - - - - - - - - OUTGOING - - - - - - - - - - \n")
@@ -42,5 +40,27 @@ class NetworkLogger {
         print("\n - - - - - - - - - - INCOMING - - - - - - - - - - \n")
         print(logOutput)
         print("\n - - - - - - - - - - - -  - - - - - - - - - - - - \n")
+    }
+
+    static func printJSONData(data: Data) {
+        guard
+            let object = try? JSONSerialization.jsonObject(
+                with: data,
+                options: []
+            ),
+            let prettyData = try? JSONSerialization.data(
+                withJSONObject: object,
+                options: [.prettyPrinted]
+            ),
+            let prettyPrintedString = String(
+                data: prettyData,
+                encoding: .utf8
+            ) else {
+            let rawString = String(data: data, encoding: .utf8) ?? ""
+            print("----- Non-JSON Response\n\n\(rawString)")
+            return
+        }
+
+        print(prettyPrintedString)
     }
 }

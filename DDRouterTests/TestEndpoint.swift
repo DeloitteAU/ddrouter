@@ -44,8 +44,10 @@ extension TestEndpoint: EndpointType {
     var baseURL: URL {
         switch self {
         case .randomQuote:
+            // swiftlint:disable:next force_unwrapping
             return URL(string: "https://programming-quotes-api.herokuapp.com")!
         case .postmanPost:
+            // swiftlint:disable:next force_unwrapping
             return URL(string: "https://postman-echo.com")!
         }
     }

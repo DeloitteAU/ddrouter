@@ -1,4 +1,4 @@
---exclude Carthage
+--exclude Pods
 --acronyms ID,URL,UUID
 --allman false
 --assetliterals visual-width

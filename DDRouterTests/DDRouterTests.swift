@@ -24,7 +24,7 @@ class DDRouterTests: XCTestCase {
         guard let response: ResponseModel = try? router?.request(.randomQuote)
             .toBlocking()
             .first() else {
-            XCTFail()
+            XCTFail("Test failed")
             return
         }
 
@@ -33,11 +33,11 @@ class DDRouterTests: XCTestCase {
     }
 
     func testRawData() throws {
-        let data: Data = "A raw string".data(using: .utf8)!
+        let data: Data = try XCTUnwrap("A raw string".data(using: .utf8))
         guard let response: PostmanDataModel = try? router?.request(.postmanPost(data: data))
             .toBlocking()
             .first() else {
-            XCTFail()
+            XCTFail("Test failed")
             return
         }
 
@@ -45,20 +45,21 @@ class DDRouterTests: XCTestCase {
     }
 
     func testRawJSON() throws {
-        let data: Data = """
+        let data: Data = try XCTUnwrap("""
         {
         "foo": "bar",
         "dog": "7"
         }
-        """.data(using: .utf8)!
+        """.data(using: .utf8))
         guard let response: PostmanJSONModel = try? router?.request(.postmanPost(data: data))
             .toBlocking()
             .first() else {
-            XCTFail()
+            XCTFail("Test failed")
             return
         }
 
-        XCTAssertEqual(response.json!["foo"], "bar")
-        XCTAssertEqual(response.json!["dog"], "7")
+        let jsonResponse = try XCTUnwrap(response.json)
+        XCTAssertEqual(jsonResponse["foo"], "bar")
+        XCTAssertEqual(jsonResponse["dog"], "7")
     }
 }
